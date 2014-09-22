@@ -7,7 +7,7 @@ __author__ = 'Zhang Peihao'
 __copyright__ = 'Copyright 2014'
 __credits__ = []
 
-__version__ = '0.1.5'
+__version__ = '0.1.8'
 __maintainer__ = 'Zhang Peihao'
 __email__ = 'zhangpeihao@gmail.com'
 
@@ -45,8 +45,8 @@ setuptools.setup(
                  'License :: OSI Approved :: Apache Software License'],
     platforms=['Independent'],
     license=open('./LICENSE').read(),
-    namespace_packages=['docker_registry', 'docker_registry.drivers'],
-    packages=['docker_registry', 'docker_registry.drivers'],
+    namespace_packages=['docker_registry', 'docker_registry.drivers', 'docker_registry.contrib'],
+    packages=['docker_registry', 'docker_registry.drivers', 'docker_registry.contrib', 'docker_registry.contrib.qiniu'],
     package_data = {'docker_registry': ['../config/*']},
     install_requires=open('./requirements.txt').read(),
     zip_safe=True,

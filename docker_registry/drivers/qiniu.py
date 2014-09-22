@@ -1,7 +1,7 @@
-import qiniu.conf
-import qiniu.rs
-import qiniu.rsf
-import qiniu.io
+from docker_registry.contrib import qiniu.conf
+from docker_registry.contrib import qiniu.rs
+from docker_registry.contrib import qiniu.rsf
+from docker_registry.contrib import qiniu.io
 
 from docker_registry.core import driver
 from docker_registry.core import exceptions
@@ -10,7 +10,6 @@ import StringIO
 import tempfile
 import os
 import urllib
-
 
 class Storage(driver.Base):
 
