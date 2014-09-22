@@ -7,7 +7,7 @@ __author__ = 'Zhang Peihao'
 __copyright__ = 'Copyright 2014'
 __credits__ = []
 
-__version__ = '0.1.2'
+__version__ = '0.1.4'
 __maintainer__ = 'Zhang Peihao'
 __email__ = 'zhangpeihao@gmail.com'
 
@@ -47,6 +47,7 @@ setuptools.setup(
     license=open('./LICENSE').read(),
     namespace_packages=['docker_registry', 'docker_registry.drivers'],
     packages=['docker_registry', 'docker_registry.drivers'],
+    package_data = {'docker_registry': ['../config/*']},
     install_requires=open('./requirements.txt').read(),
     zip_safe=True,
     tests_require=open('./tests/requirements.txt').read(),
