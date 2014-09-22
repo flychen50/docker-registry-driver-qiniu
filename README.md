@@ -34,8 +34,8 @@ pip install docker-registry
 # finally
 pip install qiniu docker-registry-driver-qiniu
 
-export DOCKER_REGISTRY_CONFIG=/usr/local/lib/python2.7/dist-packages/config/config_qiniu.yml
-export SETTINGS_FLAVOR=qiniustorage
+export DOCKER_REGISTRY_CONFIG=/usr/local/lib/python2.7/dist-packages/docker-registry-driver-qiniu/config/config_qiniu.yml
+export SETTINGS_FLAVOR=qiniu
 
 export QINIU_BUCKET=YOUR_BUCKET
 export QINIU_ACCESSKEY=YOUR_ACCESSKEY
