@@ -16,6 +16,7 @@ __build__ = 0x000000
 
 __url__ = 'https://gitcafe.com/zhangpeihao/docker-registry-driver-qiniu'
 __description__ = 'Docker registry qiniu storage driver'
+__download__ = 'https://gitcafe.com/zhangpeihao/docker-registry-driver-qiniu/archiveball/master/zip'
 
 setuptools.setup(
     name=__title__,
