@@ -11,6 +11,7 @@ import tempfile
 import os
 import urllib
 
+
 class Storage(driver.Base):
 
     def __init__(self, path=None, config=None):

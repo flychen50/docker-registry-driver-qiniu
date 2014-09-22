@@ -11,7 +11,6 @@ class TestQuery(testing.Query):
     def __init__(self):
         self.scheme = 'qiniu'
 
-
 class TestDriver(testing.Driver):
     def __init__(self):
         self.scheme = 'qiniu'
