@@ -54,7 +54,7 @@ class Storage(driver.Base):
             base_url = qiniu.rs.make_base_url(self._domain, path)
             get_url = self._getpolicy.make_request(base_url)
             response = urllib.Request.urlopen(get_url)
-        except KeyNotFound:
+        except:
             raise exceptions.FileNotFoundError('%s is not there' % path)
 
         try:
@@ -63,6 +63,7 @@ class Storage(driver.Base):
                 if not chunk: break
                 yield chunk
         except:
+            print err
             raise IOError("Could not get content: %s" % path)
 
     @lru.set
@@ -76,12 +77,10 @@ class Storage(driver.Base):
         if length is not None:
             headers['Content-Length'] = str(length)
 
-        try:
-            ret, err = qiniu.io.put(self._uptoken, path, content, None)
-            if err is not None:
-                raise IOError("Put content %s err: %s" % (path, err))
-        except Exception:
-            raise IOError("Could not put content: %s" % path)
+        ret, err = qiniu.io.put(self._uptoken, path, content, None)
+        if err is not None:
+            print err
+            raise IOError("Put content %s err: %s" % (path, err))
 
     def stream_read(self, path, bytes_range=None):
         path = self._init_path(path)
@@ -114,6 +113,7 @@ class Storage(driver.Base):
     def head_store(self, path):
         ret, err = qiniu.rs.Client().stat(self._bucket, path)
         if err is not None:
+            print err
             raise IOError("Stat path %s err: %s" % (path, err))
         return ret
 
@@ -133,6 +133,7 @@ class Storage(driver.Base):
                     yield item[0]
             
             if err is not qiniu.rsf.EOF:
+                print err
                 raise IOError("List path %s err: %s" % (path, err))
             
             if counter == 0:
@@ -159,6 +160,7 @@ class Storage(driver.Base):
 
         ret, err = qiniu.rs.Client().delete(self._bucket, path)
         if err is not None:
+            print err
             raise IOError("List path %s err: %s" % (path, err))
 
     def get_size(self, path):
