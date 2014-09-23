@@ -10,10 +10,11 @@ Run docker-registry service by docker container
 
 ```
 docker run --rm \
-  -e SETTINGS_FLAVOR=qiniu \
+  -e SETTINGS_FLAVOR=qiniustorage \
   -e QINIU_BUCKET=YOUR_BUCKET \
   -e QINIU_ACCESSKEY=YOUR_ACCESSKEY \
   -e QINIU_SECRETKEY=YOUR_SECRETKEY \
+  -e QINIU_DOMAIN=YOUR_BUCKET_DOMAIN \
   -p 5000:5000 \
   --name registry \
   zhangpeihao/docker-registry-qiniu
@@ -35,11 +36,12 @@ pip install docker-registry
 pip install qiniu docker-registry-driver-qiniu
 
 export DOCKER_REGISTRY_CONFIG=/usr/local/lib/python2.7/dist-packages/docker-registry-driver-qiniu/config/config_qiniu.yml
-export SETTINGS_FLAVOR=qiniu
+export SETTINGS_FLAVOR=qiniustorage
 
 export QINIU_BUCKET=YOUR_BUCKET
 export QINIU_ACCESSKEY=YOUR_ACCESSKEY
 export QINIU_SECRETKEY=YOUR_SECRETKEY
+export QINIU_DOMAIN=YOUR_BUCKET_DOMAIN
 docker-registry
 ```
 

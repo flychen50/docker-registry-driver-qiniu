@@ -14,13 +14,13 @@ import urllib
 class Storage(driver.Base):
 
     def __init__(self, path=None, config=None):
-        qiniu.conf.ACCESS_KEY = config.qiniu.accesskey
-        qiniu.conf.SECRET_KEY = config.qiniu.secretkey
+        qiniu.conf.ACCESS_KEY = config.qiniustorage.accesskey
+        qiniu.conf.SECRET_KEY = config.qiniustorage.secretkey
 
-        self._bucket = config.qiniu.bucket
-        self._domain = config.qiniu.domain
+        self._bucket = config.qiniustorage.bucket
+        self._domain = config.qiniustorage.domain
         
-        self._putpolicy = qiniu.rs.PutPolicy(_config.qiniu.bucket)
+        self._putpolicy = qiniu.rs.PutPolicy(config.qiniustorage.bucket)
         self._getpolicy = qiniu.rc.GetPolicy()
         self._uptoken = self._policy.tocken()
         

@@ -20,7 +20,7 @@ run pip install docker-registry docker-registry-driver-qiniu
 add . /docker-registry-driver-qiniu
 
 env DOCKER_REGISTRY_CONFIG /docker-registry-driver-qiniu/config/config_qiniu.yml
-env SETTINGS_FLAVOR qiniu
+env SETTINGS_FLAVOR qiniustorage
 
 expose 5000
 

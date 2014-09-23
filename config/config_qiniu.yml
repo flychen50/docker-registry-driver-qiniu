@@ -67,7 +67,7 @@ common: &common
         vary_header: _env:CORS_VARY_HEADER
         resources: _env:CORS_RESOURCES
 
-qiniu: &qiniu
+qiniustorage: &qiniustorage
     <<: *common
     storage: qiniustorage
     qiniu_bucket: _env:QINIU_BUCKET
@@ -97,6 +97,6 @@ test:
 # To specify another flavor, set the environment variable SETTINGS_FLAVOR
 # $ export SETTINGS_FLAVOR=prod
 prod:
-    <<: *qiniu
+    <<: *qiniustorage
     storage_path: _env:STORAGE_PATH:/prod
 
