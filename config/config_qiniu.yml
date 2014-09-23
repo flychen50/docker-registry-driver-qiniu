@@ -69,7 +69,7 @@ common: &common
 
 qiniu: &qiniu
     <<: *common
-    storage: qiniu
+    storage: qiniustorage
     qiniu_bucket: _env:QINIU_BUCKET
     qiniu_accesskey: _env:QINIU_ACCESSKEY
     qiniu_secretkey: _env:QINIU_SECRETKEY

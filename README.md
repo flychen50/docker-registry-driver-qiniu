@@ -10,7 +10,7 @@ Run docker-registry service by docker container
 
 ```
 docker run --rm \
-  -e SETTINGS_FLAVOR=qiniustorage \
+  -e SETTINGS_FLAVOR=qiniu \
   -e QINIU_BUCKET=YOUR_BUCKET \
   -e QINIU_ACCESSKEY=YOUR_ACCESSKEY \
   -e QINIU_SECRETKEY=YOUR_SECRETKEY \

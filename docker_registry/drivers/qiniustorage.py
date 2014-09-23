@@ -1,7 +1,7 @@
-import qiniu.conf as qiniu_conf
-import qiniu.rs as qiniu_rs
-import qiniu.rsf as qiniu_rsf
-import qiniu.io as qiniu_io
+import qiniu.conf
+import qiniu.rs
+import qiniu.rsf
+import qiniu.io
 
 from docker_registry.core import driver
 from docker_registry.core import exceptions
@@ -14,13 +14,13 @@ import urllib
 class Storage(driver.Base):
 
     def __init__(self, path=None, config=None):
-        qiniu_conf.ACCESS_KEY = config.qiniu_accesskey
-        qiniu_conf.SECRET_KEY = config.qiniu_secretkey
+        qiniu.conf.ACCESS_KEY = config.qiniu.accesskey
+        qiniu.conf.SECRET_KEY = config.qiniu.secretkey
 
-        self._bucket = config.qiniu_bucket
-        self._domain = config.qiniu_domain
+        self._bucket = config.qiniu.bucket
+        self._domain = config.qiniu.domain
         
-        self._putpolicy = qiniu_rs.PutPolicy(_config.qiniu_bucket)
+        self._putpolicy = qiniu.rs.PutPolicy(_config.qiniu.bucket)
         self._getpolicy = qiniu.rc.GetPolicy()
         self._uptoken = self._policy.tocken()
         
@@ -34,7 +34,7 @@ class Storage(driver.Base):
 
     def content_redirect_url(self, path):
         path = self._init_path(path)
-        base_url = qiniu_rs.make_base_url(self._domain, path)
+        base_url = qiniu.rs.make_base_url(self._domain, path)
         return self._getpolicy.make_request(base_url)
 
     @lru.get
@@ -51,7 +51,7 @@ class Storage(driver.Base):
 
     def get_store(self, path, chunk_size=None):
         try:
-            base_url = qiniu_rs.make_base_url(self._domain, path)
+            base_url = qiniu.rs.make_base_url(self._domain, path)
             get_url = self._getpolicy.make_request(base_url)
             response = urllib.Request.urlopen(get_url)
         except KeyNotFound:
@@ -77,7 +77,7 @@ class Storage(driver.Base):
             headers['Content-Length'] = str(length)
 
         try:
-            ret, err = qiniu_io.put(self._uptoken, path, content, None)
+            ret, err = qiniu.io.put(self._uptoken, path, content, None)
             if err is not None:
                 raise IOError("Put content %s err: %s" % (path, err))
         except Exception:
@@ -112,7 +112,7 @@ class Storage(driver.Base):
                     os.remove(tmp_file)
 
     def head_store(self, path):
-        ret, err = qiniu_rs.Client().stat(self._bucket, path)
+        ret, err = qiniu.rs.Client().stat(self._bucket, path)
         if err is not None:
             raise IOError("Stat path %s err: %s" % (path, err))
         return ret
@@ -120,7 +120,7 @@ class Storage(driver.Base):
     def list_directory(self, path=None):
         try:
             path = self._init_path(path)
-            rs = qiniu_rsf.Client()
+            rs = qiniu.rsf.Client()
             marker = None
             err = None
             counter = 0
@@ -132,7 +132,7 @@ class Storage(driver.Base):
                     counter += 1
                     yield item[0]
             
-            if err is not qiniu_rsf.EOF:
+            if err is not qiniu.rsf.EOF:
                 raise IOError("List path %s err: %s" % (path, err))
             
             if counter == 0:
@@ -157,7 +157,7 @@ class Storage(driver.Base):
         except Exception:
             raise exceptions.FileNotFoundError('%s is not there' % path)
 
-        ret, err = qiniu_rs.Client().delete(self._bucket, path)
+        ret, err = qiniu.rs.Client().delete(self._bucket, path)
         if err is not None:
             raise IOError("List path %s err: %s" % (path, err))
 
